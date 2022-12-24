@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import styles from "../components/data.module.css";
 
 export const UserDetails = ({ data }) => {
   const [perpageData, setPerPage] = useState(data);
   const [pageNo, setPageNo] = useState(1);
 
   useEffect(() => {
-    setPerPage(data.slice((pageNo - 1) * 5, pageNo * 5));
+    setPerPage(data.slice((pageNo - 1) * 4, pageNo * 4));
   }, [pageNo]);
 
   const filterByCountry = (e) => {
@@ -47,16 +48,16 @@ export const UserDetails = ({ data }) => {
         <option value="Iran">Iran</option>
         <option value="Serbia">Serbia</option>
       </select>
-      <table>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Cell</th>
-            <th>City</th>
-            <th>country</th>
+      <table className={styles.tablediv}>
+        <thead className={styles.thead}>
+          <tr className={styles.tr}>
+            <th className={styles.th}>Image</th>
+            <th className={styles.th}>Name</th>
+            <th className={styles.th}>Gender</th>
+            <th className={styles.th}>Email</th>
+            <th className={styles.th}>Cell</th>
+            <th className={styles.th}>City</th>
+            <th className={styles.th}>country</th>
           </tr>
         </thead>
         <tbody>
@@ -64,30 +65,39 @@ export const UserDetails = ({ data }) => {
             <h1>Loading...</h1>
           ) : (
             perpageData.map((elem, index) => (
-              <tr key={index}>
-                <td>
-                  <img src={elem.picture.large} alt={elem.name.first} />
+              <tr className={styles.tr} key={index}>
+                <td className={styles.td}>
+                  <img
+                    style={{ borderRadius: "5px" }}
+                    src={elem.picture.large}
+                    alt={elem.name.first}
+                  />
                 </td>
-                <td>
+                <td className={styles.td}>
                   {elem.name.title} {elem.name.first} {elem.name.last}
                 </td>
-                <td>{elem.gender}</td>
-                <td>{elem.email}</td>
-                <td>{elem.cell}</td>
-                <td>{elem.location.city}</td>
-                <td>{elem.location.country}</td>
+                <td className={styles.td}>{elem.gender}</td>
+                <td className={styles.td}>{elem.email}</td>
+                <td className={styles.td}>{elem.cell}</td>
+                <td className={styles.td}>{elem.location.city}</td>
+                <td className={styles.td}>{elem.location.country}</td>
               </tr>
             ))
           )}
         </tbody>
       </table>
 
-      <div>
-        <button disabled={pageNo == 1} onClick={() => setPageNo(pageNo - 1)}>
+      <div className={styles.paginationdiv}>
+        <button
+          className={styles.pagination_btn}
+          disabled={pageNo == 1}
+          onClick={() => setPageNo(pageNo - 1)}
+        >
           Prev
         </button>
-        <span>{pageNo}</span>
+        <span className={styles.span}>{pageNo}</span>
         <button
+          className={styles.pagination_btn}
           disabled={pageNo * 5 == data.length}
           onClick={() => setPageNo(pageNo + 1)}
         >

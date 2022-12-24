@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../components/data.module.css";
 
 export const Home = ({ data, setData }) => {
   const [showAlert, setAlert] = useState(false);
@@ -9,7 +10,9 @@ export const Home = ({ data, setData }) => {
   const getdata = async () => {
     let datalist = [];
     for (let a = 0; a < 50; a++) {
-      let res = await fetch("http://localhost:8080/fetch-user");
+      let res = await fetch(
+        "https://fine-ruby-chimpanzee-hem.cyclic.app/fetch-user"
+      );
       let data = await res.json();
       datalist.push(data);
     }
@@ -33,10 +36,16 @@ export const Home = ({ data, setData }) => {
     navigate("/user-details");
   };
   return (
-    <div>
-      <button onClick={fetchData}>Fetch data</button>
-      <button onClick={deleteData}>Delete data</button>
-      <button onClick={userDetails}>User details</button>
+    <div className={styles.button_div}>
+      <button className={styles.btn1} onClick={fetchData}>
+        Fetch data
+      </button>
+      <button className={styles.btn1} onClick={deleteData}>
+        Delete data
+      </button>
+      <button className={styles.btn1} onClick={userDetails}>
+        User details
+      </button>
       <h1>{showAlert && "Data fatching..."}</h1>
     </div>
   );
