@@ -16,12 +16,25 @@ export const UserDetails = ({ data }) => {
     let filterData = data.filter(
       (elem) => elem.location.country == e.target.value
     );
-
     console.log(filterData);
     setPerPage(filterData);
   };
+
+  const filterbyGender = (e) => {
+    console.log(e.target.value);
+    let filterBygender = data.filter((elem) => elem.gender == e.target.value);
+    console.log(filterBygender);
+    setPerPage(filterBygender);
+  };
   return (
     <div>
+      <label htmlFor="">Filter By Gender: </label>
+      <select onChange={filterbyGender}>
+        <option value="#">Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      
       <label htmlFor="">Filer By country: </label>
       <select onChange={filterByCountry}>
         <option value="#">Filter By country</option>
